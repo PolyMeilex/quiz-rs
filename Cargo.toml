@@ -1,0 +1,15 @@
+[package]
+name = "quiz"
+version = "0.0.1"
+edition = "2018"
+
+authors = ["Poly <marynczak.bartlomiej@gmail.com>"]
+description = "CLI Prompts crate"
+keywords = ["CLI","Prompt"]
+license = "MIT"
+repository = "https://github.com/PolyMeilex/quiz-rs"
+documentation = "https://docs.rs/quiz"
+
+[dependencies]
+figures-rs = "0.0.1"
+termion = "1.5.5"
