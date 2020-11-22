@@ -13,3 +13,7 @@ documentation = "https://docs.rs/quiz"
 [dependencies]
 figures-rs = "0.0.1"
 termion = "1.5.5"
+
+[[bin]]
+name = "test"
+path = "./bin/test.rs"

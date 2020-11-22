@@ -11,7 +11,7 @@ pub fn select<'a, T: std::fmt::Display>(prompt: &str, list: &'a [T]) -> Option<&
 
     write!(
         stdout,
-        "{} ? {}{}{}{}?\n\r",
+        "{} ? {}{}{}{}\n\r",
         termion::color::Fg(termion::color::Green),
         termion::style::Reset,
         termion::style::Bold,
@@ -91,7 +91,7 @@ pub fn checkbox<'a, T: std::fmt::Display>(
 
     write!(
         stdout,
-        "{} ? {}{}{}{}?\n\r",
+        "{} ? {}{}{}{}\n\r",
         termion::color::Fg(termion::color::Green),
         termion::style::Reset,
         termion::style::Bold,
