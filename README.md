@@ -13,4 +13,7 @@ quiz="*"
 ## Checkbox
 ![Checkbox](https://i.imgur.com/d3TsQv5.png)
 
+## Confirm 
+![Confirm](https://i.imgur.com/91ZiJLz.png)
+
 ## More coming in future...

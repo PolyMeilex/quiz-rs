@@ -169,3 +169,78 @@ pub fn checkbox<'a, T: std::fmt::Display>(
         print!("{}", termion::cursor::Up(list.len() as u16));
     }
 }
+
+pub fn confirm(prompt: &str) -> bool {
+    let stdin = stdin();
+    let mut stdout = stdout().into_raw_mode().unwrap();
+
+    write!(
+        stdout,
+        "{} ? {}{}{}{} (y/n) ",
+        termion::color::Fg(termion::color::Green),
+        termion::style::Reset,
+        termion::style::Bold,
+        prompt,
+        termion::style::Reset
+    )
+    .unwrap();
+
+    let mut curr = None;
+    let mut input = stdin.keys();
+
+    fn curr_to_letter(curr: &Option<bool>) -> &str {
+        if let Some(curr) = curr {
+            if *curr {
+                "Y"
+            } else {
+                "N"
+            }
+        } else {
+            " "
+        }
+    }
+
+    write!(stdout, "{}", termion::cursor::Hide).unwrap();
+    loop {
+        write!(
+            stdout,
+            "{}{}",
+            termion::clear::AfterCursor,
+            curr_to_letter(&curr)
+        )
+        .unwrap();
+        print!("{}", termion::cursor::Left(1));
+        stdout.flush().unwrap();
+
+        let next = input.next().unwrap();
+
+        match next.unwrap() {
+            Key::Char('\n') | Key::Char('l') => {
+                write!(stdout, "\n\r{}", termion::cursor::Show).unwrap();
+                return if let Some(true) = curr { true } else { false };
+            }
+            Key::Up | Key::Char('k') => {
+                if let Some(c) = curr {
+                    curr = Some(!c);
+                } else {
+                    curr = Some(false);
+                }
+            }
+            Key::Down | Key::Char('j') => {
+                if let Some(c) = curr {
+                    curr = Some(!c);
+                } else {
+                    curr = Some(true);
+                }
+            }
+            Key::Char('y') | Key::Char('Y') => curr = Some(true),
+            Key::Char('n') | Key::Char('N') => curr = Some(false),
+            Key::Backspace => curr = None,
+            Key::Ctrl('c') | Key::Char('q') => {
+                write!(stdout, "\n\r{}", termion::cursor::Show).unwrap();
+                return false;
+            }
+            _ => {}
+        };
+    }
+}
