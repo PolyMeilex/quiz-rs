@@ -1,7 +1,7 @@
 # Quiz-rs
 [![version](https://img.shields.io/crates/v/quiz.svg)](https://crates.io/crates/quiz)
 [![Documentation](https://docs.rs/quiz/badge.svg)](https://docs.rs/quiz)
-
+[![dependency status](https://deps.rs/crate/quiz/0.0.3/status.svg)](https://deps.rs/crate/quiz/0.0.3)
 # Install
 ```toml
 quiz="*"
